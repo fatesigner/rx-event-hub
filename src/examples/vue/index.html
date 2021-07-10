@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no,width=device-width"/>
+  <meta name="format-detection" content="telephone=no,email=no"/>
+  <meta name="renderer" content="webkit"/>
+  <meta http-equiv="Content-Security-Policy"/>
+  <meta name="description" content="RxEventHub vue example"/>
+  <base target="_self">
+  <title>RxEventHub vue example</title>
+  <link href="https://www.unpkg.com/tailwindcss@0.7.4/dist/tailwind.min.css" rel="stylesheet" />
+  <script src="https://unpkg.com/rxjs@6.6.7/bundles/rxjs.umd.min.js"></script>
+  <script src="https://unpkg.com/vue-rx@6.2.0/dist/vue-rx.js"></script>
+  <script src="../../../dist/umd/rx-event-hub.umd.js"></script>
+</head>
+<body>
+<noscript>
+  <strong>Please enable JavaScript to continue.</strong>
+</noscript>
+<div id="app" class="p-20">
+  <div class="flex items-center p-5 mb-6 border-4 border-indigo-600">
+    <div>输入：</div>
+    <input type="text" class="p-2 border-2 outline-none"/>
+  </div>
+  <div class="flex items-center p-5 border-4 border-indigo-600">
+    <div>接收：</div>
+    <div>{{ message$ }}</div>
+  </div>
+</div>
+<script type="module">
+  import Vue from 'https://unpkg.com/vue@2.6.11/dist/vue.esm.browser.js';
+
+  Vue.use(VueRx);
+
+  const { pluck } = window.rxjs.operators;
+  const { rxEmit, RxEventHub } = window.RxEventHub;
+
+  const EVENT = Symbol.for('INPUT')
+
+  const app = new Vue({
+    el: '#app',
+    subscriptions() {
+      return {
+        input$: this.$fromDOMEvent('input', 'keyup').pipe(
+          pluck('target', 'value'),
+          rxEmit(EVENT, (text) => {
+            return `User input ${text}`;
+          })
+        ),
+        message$: RxEventHub.obs(EVENT)
+      }
+    }
+  });
+</script>
+</body>
+</html>
