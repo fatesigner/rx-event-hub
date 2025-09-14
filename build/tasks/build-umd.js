@@ -26,16 +26,16 @@ const runWebpack = function (options, isLog = false) {
 };
 
 gulp.task('build-umd', async function () {
-  const env = require('../env')();
+  const { OUTPUT_PATH, SRC_PATH } = require('../constants');
 
   // Build umd.js
   await runWebpack(
     {
       mode: 'production',
-      entry: path.join(env.srcPath, 'index.ts'),
-      context: env.srcPath,
+      entry: path.join(SRC_PATH, 'index.ts'),
+      context: SRC_PATH,
       output: {
-        path: path.join(env.outputPath, 'umd'),
+        path: path.join(OUTPUT_PATH, 'umd'),
         chunkFilename: 'rx-event-hub.umd.chunk.js',
         filename: 'rx-event-hub.umd.js',
         library: 'RxEventHub',

@@ -1,5 +1,4 @@
-import { take } from 'rxjs/operators';
-import { Observable, PartialObserver, ReplaySubject, Subject, Subscription } from 'rxjs';
+import { Observable, PartialObserver, ReplaySubject, Subject, Subscription, take } from 'rxjs';
 
 import { isEventHandler } from './utils';
 

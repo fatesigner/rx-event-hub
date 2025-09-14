@@ -1,6 +1,5 @@
 import { expect } from 'chai';
-import { interval } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { interval, take } from 'rxjs';
 import { RxEventHub, rxEmit } from '../dist';
 
 jest.setTimeout(30000);

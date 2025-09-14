@@ -2,8 +2,7 @@
  * operators
  */
 
-import { tap } from 'rxjs/operators';
-import { MonoTypeOperatorFunction } from 'rxjs';
+import { MonoTypeOperatorFunction, tap } from 'rxjs';
 
 import { IEvent, RxEventHub } from './core';
 

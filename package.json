@@ -1,6 +1,6 @@
 {
   "name": "rx-event-hub",
-  "version": "0.0.0",
+  "version": "1.1.0",
   "description": "基于 Rxjs 实现的可创建全局事件总线（发布-订阅模式）的 javascript 套件，适用于 web 和 node 环境",
   "license": "MIT",
   "keywords": [
@@ -38,17 +38,16 @@
   },
   "prettier": "@fatesigner/eslint-config/.prettierrc",
   "peerDependencies": {
-    "rxjs": "6.x"
+    "rxjs": "7.x"
   },
   "devDependencies": {
-    "@babel/core": "7.14.6",
-    "@babel/eslint-parser": "7.14.7",
-    "@babel/preset-env": "7.14.7",
-    "@babel/preset-react": "7.14.5",
+    "@babel/core": "7.22.0",
+    "@babel/preset-env": "7.22.0",
+    "@babel/preset-react": "7.22.0",
     "@commitlint/cli": "12.1.4",
     "@commitlint/config-conventional": "12.1.4",
     "@fatesigner/cz-customizable": "6.3.0",
-    "@fatesigner/eslint-config": "2.1.0",
+    "@fatesigner/eslint-config": "2.2.0",
     "@semantic-release/changelog": "5.0.1",
     "@semantic-release/git": "9.0.0",
     "@types/chai": "4.2.20",
@@ -74,7 +73,7 @@
     "reflect-metadata": "0.1.13",
     "require-dir": "1.2.0",
     "rimraf": "3.0.2",
-    "rxjs": "6.6.7",
+    "rxjs": "7.8.2",
     "semantic-release": "17.4.4",
     "travis": "0.1.1",
     "ts-jest": "27.0.3",

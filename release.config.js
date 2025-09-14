@@ -14,7 +14,7 @@ const releaseRules = [
 
 const releaseRulesArray = releaseRules.map((x) => x.type);
 
-// 对于没有定义在releaseRules里的type 默认设置其发布版本为 patch
+// 对于没有定义在 releaseRules 里的 type, 默认设置其发布版本为 patch
 czConfig.types.forEach((x) => {
   if (releaseRulesArray.indexOf(x.value) < 0) {
     releaseRules.push({

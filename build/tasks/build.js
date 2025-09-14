@@ -15,21 +15,21 @@ require('./clean');
 gulp.task(
   'build',
   gulp.series('clean', gulp.parallel('build-cjs', 'build-esm', 'build-umd'), async function () {
-    const env = require('../env')();
+    const { OUTPUT_PATH, ROOT_PATH, SRC_PATH } = require('../constants');
 
     // Copy examples to output
     await new Promise((resolve) => {
       gulp
-        .src([path.join(env.srcPath, 'examples', '**/*')])
-        .pipe(gulp.dest(path.join(env.outputPath, 'examples')))
+        .src([path.join(SRC_PATH, 'examples', '**/*')])
+        .pipe(gulp.dest(path.join(OUTPUT_PATH, 'examples')))
         .on('end', resolve);
     });
 
     // Copy npm publish files to output
     await new Promise((resolve) => {
       gulp
-        .src(['README.md'].map((x) => path.join(env.rootPath, x)))
-        .pipe(gulp.dest(env.outputPath))
+        .src(['README.md'].map((x) => path.join(ROOT_PATH, x)))
+        .pipe(gulp.dest(OUTPUT_PATH))
         .on('end', resolve);
     });
 
@@ -43,6 +43,6 @@ gulp.task(
         return prev;
       }, {});
     }
-    fs.writeFileSync(path.join(env.outputPath, 'package.json'), JSON.stringify(pkg, null, 2), { encoding: 'utf8' });
+    fs.writeFileSync(path.join(OUTPUT_PATH, 'package.json'), JSON.stringify(pkg, null, 2), { encoding: 'utf8' });
   })
 );

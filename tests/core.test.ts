@@ -1,7 +1,6 @@
 import { expect } from 'chai';
 import { rxEmit, rxObs } from '../src';
-import { Observable, of } from 'rxjs';
-import { scan } from 'rxjs/operators';
+import { Observable, of, scan } from 'rxjs';
 import { createEvent, createReplayEvent, RxEventHub } from '../dist';
 
 jest.setTimeout(30000);

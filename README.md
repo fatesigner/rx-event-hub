@@ -1,17 +1,12 @@
 # RxEventHub
 
-[![npm][npm-image]][npm-url]
-[![download][download-image]][download-url]
-[![commitizen][commitizen-image]][commitizen-url]
-
-[npm-image]: https://img.shields.io/npm/v/rx-event-hub.svg?style=for-the-badge
-[npm-url]: https://npmjs.com/package/rx-event-hub
-[download-image]: https://img.shields.io/npm/dw/rx-event-hub.svg?style=for-the-badge&color=green
-[download-url]: https://npmjs.com/package/rx-event-hub
-[commitizen-image]: https://img.shields.io/badge/commitizen-friendly-green.svg?style=for-the-badge
-[commitizen-url]: http://commitizen.github.io/cz-cli/
+[npm][npm-url]
+[download][download-url]
+[commitizen][commitizen-url]
+[semantic][semantic-url]
 
 ### Rxjs + Event Hub
+
 > 基于 Rxjs 实现的可创建全局事件总线（发布-订阅模式）的 javascript 套件，适用于 web 和 node 环境
 
 ## 安装
@@ -21,10 +16,11 @@ npm i -S rx-event-hub
 ```
 
 ## 使用
+
 ### 全局
+
 ```ts
-import { timer } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { timer, map } from 'rxjs';
 import { RxEventHub, rxEmit } from 'rx-event-hub';
 
 // 定义事件
@@ -54,9 +50,9 @@ timer(2000)
 ```
 
 ### 创建自定义事件
+
 ```ts
-import { timer } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { timer, map } from 'rxjs';
 import { createEvent, createReplayEvent, rxEmit } from 'rx-event-hub';
 
 // 自定义事件
@@ -92,78 +88,86 @@ events.login$.on((user) => {
 ```
 
 ## API
+
 #### RxEventHub.emit\<T\>(event: [IEvent](#IEvent)\<T\>, payload?: T): void
+
 > 发布一个全局事件
 
-| Param | Type | Description |
-| --- | --- | --- |
-| event | [IEvent](#IEvent) | 事件 |
-| payload | \<T\> | 消息数据 |
+| Param   | Type           | Description |
+| ------- | -------------- | ----------- |
+| event   | [IEvent](#IEvent) | 事件        |
+| payload | \<T\>          | 消息数据    |
 
-| Return | Description |
-| --- | --- |
+| Return     | Description  |
+| ---------- | ------------ |
 | Observable | 待订阅的对象 |
 
-#### RxEventHub.on\<T\>(event: [IEvent](#IEvent)\<T\>, observerOrNext?: PartialObserver<T> | ((value: T) => void), error?: (error: any) => void, complete?: () => void): Subscription
+#### RxEventHub.on\<T\>(event: [IEvent](#IEvent)\<T\>, observerOrNext?: PartialObserver`<T>` | ((value: T) => void), error?: (error: any) => void, complete?: () => void): Subscription
+
 > 订阅全局事件.
 
-| Param | Type | Description |
-| --- | --- | --- |
-| event | [IEvent](#IEvent) | 事件 |
+| Param | Type           | Description |
+| ----- | -------------- | ----------- |
+| event | [IEvent](#IEvent) | 事件        |
 
-| Return | Description |
-| --- | --- |
+| Return     | Description  |
+| ---------- | ------------ |
 | Observable | 待订阅的对象 |
 
-#### RxEventHub.one\<T\>(event: [IEvent](#IEvent)\<T\>, observerOrNext?: PartialObserver<T> | ((value: T) => void), error?: (error: any) => void, complete?: () => void): Subscription
+#### RxEventHub.one\<T\>(event: [IEvent](#IEvent)\<T\>, observerOrNext?: PartialObserver`<T>` | ((value: T) => void), error?: (error: any) => void, complete?: () => void): Subscription
+
 > 订阅全局事件，只观测一次，观测完成后该订阅会被自动取消
 
-| Param | Type | Description |
-| --- | --- | --- |
-| event | [IEvent](#IEvent) | 事件 |
+| Param | Type           | Description |
+| ----- | -------------- | ----------- |
+| event | [IEvent](#IEvent) | 事件        |
 
-| Return | Description |
-| --- | --- |
+| Return     | Description  |
+| ---------- | ------------ |
 | Observable | 待订阅的对象 |
 
 #### RxEventHub.unsubscribe(event: string | symbol): void
+
 > 取消订阅
 
-| Param | Type | Description |
-| --- | --- | --- |
-| event | string or symbol | 事件名 |
+| Param | Type             | Description |
+| ----- | ---------------- | ----------- |
+| event | string or symbol | 事件名      |
 
 #### createEvent\<T\>(): IEventHandler\<T\>
+
 > 创建事件
 
-| Return | Description |
-| --- | --- |
-| [IEventHandler](#IEventHandler) | 事件句柄 |
+| Return                       | Description |
+| ---------------------------- | ----------- |
+| [IEventHandler](#IEventHandler) | 事件句柄    |
 
 #### createReplayEvent\<T\>(bufferSize?: number, windowTime?: number): IEventHandler\<T\>
+
 > 创建一个可回放的事件~~
 
-| Param | Type | Description |
-| --- | --- | --- |
+| Param      | Type   | Description                             |
+| ---------- | ------ | --------------------------------------- |
 | bufferSize | number | 回放次数（缓存的旧值个数），默认值为: 1 |
-| windowTime | number | 多久之前的值可以记录（毫秒） |
+| windowTime | number | 多久之前的值可以记录（毫秒）            |
 
-| Return | Description |
-| --- | --- |
-| [IEventHandler](#IEventHandler) | 事件句柄 |
+| Return                       | Description |
+| ---------------------------- | ----------- |
+| [IEventHandler](#IEventHandler) | 事件句柄    |
 
 ## 操作符（operators）
+
 #### rxEmit\<T, R\>(event: IEvent\<R\>, payload?: (value: T) => R): MonoTypeOperatorFunction\<T\>
+
 > 将消息发送给指定的事件
 
-| Param | Type | Description |
-| --- | --- | --- |
-| event | [IEvent](#IEvent) | 事件 |
-| payload | Function | 消息数据 |
+| Param   | Type           | Description |
+| ------- | -------------- | ----------- |
+| event   | [IEvent](#IEvent) | 事件        |
+| payload | Function       | 消息数据    |
 
 ```ts
-import { timer } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { timer, map } from 'rxjs';
 import { createReplayEvent, rxEmit } from 'rx-event-hub';
 
 // 自定义事件
@@ -188,15 +192,17 @@ timer(2000)
 ```
 
 ## 装饰器
+
 #### rxObs\<T\>(event: IEvent\<T\>): PropertyDecorator
+
 > 属性修饰符：更改当前属性为一个 Observable 对象
 
-| Param | Type | Description |
-| --- | --- | --- |
-| event | [IEvent](#IEvent) | 事件 |
+| Param | Type           | Description |
+| ----- | -------------- | ----------- |
+| event | [IEvent](#IEvent) | 事件        |
 
-| Return | Description |
-| --- | --- |
+| Return     | Description  |
+| ---------- | ------------ |
 | Observable | 待订阅的对象 |
 
 ```ts
@@ -240,24 +246,25 @@ test.login$.subscribe((user) => {
 ```
 
 #### rxOn\<T, R extends (...args: any[]) => any\>(event: IEvent\<T\>): MethodDecorator
+
 > 函数修饰符，将该函数添加到指定事件的观察者列表，事件触发后，该函数将会执行
 
-| Param | Type | Description |
-| --- | --- | --- |
-| event | [IEvent](#IEvent) | 事件 |
+| Param | Type           | Description |
+| ----- | -------------- | ----------- |
+| event | [IEvent](#IEvent) | 事件        |
 
 #### rxOne\<T, R extends (...args: any[]) => any\>(event: IEvent\<T\>): MethodDecorator
+
 > 函数修饰符，将该函数添加到指定事件的观察者列表，事件触发后，该函数将仅会执行一次
 
-| Param | Type | Description |
-| --- | --- | --- |
-| event | [IEvent](#IEvent) | 事件 |
+| Param | Type           | Description |
+| ----- | -------------- | ----------- |
+| event | [IEvent](#IEvent) | 事件        |
 
 ## 在 Angular 中使用
 
 ```ts
-import { Observable, of } from 'rxjs';
-import { scan } from 'rxjs/operators';
+import { Observable, of, scan } from 'rxjs';
 import { rxEmit, rxObs } from 'rx-event-hub';
 
 const EVENT = Symbol.for('LOAD_ITEMS');
@@ -300,10 +307,11 @@ of('1', '2', '3')
 ```
 
 ## 结合 [vue-rx](https://github.com/vuejs/vue-rx) 在 Vue(2.x) 中使用
+
 > 示例：在文本框输入，实时在底部显示格式后的字符
 
 ```ts
-import { pluck } from 'rxjs/operators';
+import { pluck } from 'rxjs';
 import { rxEmit, RxEventHub } from 'rx-event-hub';
 
 const EVENT = Symbol.for('INPUT');
@@ -338,13 +346,17 @@ const app = new Vue({
 ## Types
 
 #### IEventName
+
 > 事件名
+
 ```ts
 type IEventName = string | symbol;
 ```
 
 #### IEventHandler
+
 > 自定义事件句柄
+
 ```ts
 interface IEventHandler<T> {
   obs: () => Observable<T>;
@@ -355,8 +367,18 @@ interface IEventHandler<T> {
 ```
 
 #### IEvent
+
 > 事件类型
+
 ```ts
 type IEvent<T> = IEventName | IEventHandler<T>;
 ```
 
+[npm-image]: https://img.shields.io/npm/v/rx-event-hub.svg?style=for-the-badge
+[npm-url]: https://npmjs.com/package/rx-event-hub
+[download-image]: https://img.shields.io/npm/dw/rx-event-hub.svg?style=for-the-badge
+[download-url]: https://npmjs.com/package/rx-event-hub
+[commitizen-image]: https://img.shields.io/badge/commitizen-friendly-green.svg?style=for-the-badge
+[commitizen-url]: http://commitizen.github.io/cz-cli/
+[semantic-image]: https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=for-the-badge&color=9cf
+[semantic-url]: https://opensource.org/licenses/MIT
